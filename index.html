@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Benjamin Kron — Data Analytics &amp; BI Leadership</title>
-<meta name="description" content="Benjamin Kron — Data Analytics&amp; Insights Lead. Power BI, Snowflake, Microsoft Fabric. Dubai, UAE.">
+<meta name="description" content="Benjamin Kron — Data Analytics &amp; Insights Lead. Power BI, Snowflake, Microsoft Fabric. Dubai, UAE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
     --max:880px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; scroll-padding-top:70px;}
   body{
     font-family:'IBM Plex Sans', sans-serif;
     color:var(--ink);
@@ -290,11 +290,145 @@
     .kpi-strip{grid-template-columns:repeat(2, 1fr); margin-top:24px;}
     .skill-groups, .split{grid-template-columns:1fr;}
   }
+
+  /* ---------- STICKY NAV ---------- */
+  #topnav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(12,27,46,0);
+    border-bottom:1px solid rgba(255,255,255,0);
+    transition:background 0.25s ease, border-color 0.25s ease;
+  }
+  #topnav.scrolled{
+    background:rgba(12,27,46,0.96);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(6px);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:0 28px;
+    height:56px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:15px;
+    color:#EDF1F5; letter-spacing:0.02em; text-decoration:none;
+  }
+  .nav-links{display:flex; gap:26px; list-style:none;}
+  .nav-links a{
+    font-size:13.5px; color:#B9C6D4; text-decoration:none;
+    padding:4px 0; border-bottom:1px solid transparent;
+    transition:color 0.2s ease, border-color 0.2s ease;
+  }
+  .nav-links a:hover{color:#fff;}
+  .nav-links a.active{color:var(--amber-soft); border-color:var(--amber);}
+  .scroll-progress{
+    position:fixed; top:56px; left:0; height:2px; width:0%;
+    background:var(--amber); z-index:51; transition:width 0.1s linear;
+  }
+  @media (max-width:720px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- COMPANY CONTEXT TOGGLE ---------- */
+  .ctx-toggle{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--steel);
+    background:none; border:1px solid var(--line);
+    border-radius:999px; padding:5px 12px;
+    cursor:pointer; margin-bottom:16px;
+    transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .ctx-toggle:hover{background:var(--paper-card); border-color:var(--steel); color:var(--navy-deep);}
+  .ctx-toggle svg{transition:transform 0.2s ease;}
+  .ctx-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+  .ctx-panel{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows 0.25s ease;
+    margin-bottom:6px;
+  }
+  .ctx-panel.open{grid-template-rows:1fr;}
+  .ctx-panel-inner{overflow:hidden;}
+  .ctx-panel ul{
+    list-style:none;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:18px;
+  }
+  .ctx-panel li{
+    font-size:13.5px; color:#3D4C5A;
+    padding-left:16px; position:relative; margin-bottom:7px;
+  }
+  .ctx-panel li:last-child{margin-bottom:0;}
+  .ctx-panel li::before{
+    content:"";
+    position:absolute; left:0; top:7px;
+    width:4px; height:4px; border-radius:50%;
+    background:var(--amber);
+  }
+
+  /* ---------- AI FOCUS SECTION ---------- */
+  .ai-intro{
+    font-size:16px; color:#2B3A48; max-width:70ch; margin-bottom:36px;
+  }
+  .framework{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0;
+    margin-bottom:8px;
+  }
+  .fw-step{
+    position:relative;
+    background:var(--paper-card);
+    border:1px solid var(--line);
+    padding:22px 18px 20px;
+  }
+  .fw-step:not(:last-child){border-right:none;}
+  .fw-step:first-child{border-radius:10px 0 0 10px;}
+  .fw-step:last-child{border-radius:0 10px 10px 0;}
+  .fw-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--amber); margin-bottom:10px;
+  }
+  .fw-step h4{
+    font-family:'Space Grotesk', sans-serif; font-size:15px; font-weight:600;
+    color:var(--navy-deep); margin-bottom:8px;
+  }
+  .fw-step p{font-size:13px; color:var(--slate); line-height:1.5;}
+  .fw-arrow{
+    display:none;
+  }
+  @media (max-width:720px){
+    .framework{grid-template-columns:1fr;}
+    .fw-step{border-right:1px solid var(--line) !important;}
+    .fw-step:not(:last-child){border-bottom:none;}
+    .fw-step:first-child{border-radius:10px 10px 0 0;}
+    .fw-step:last-child{border-radius:0 0 10px 10px;}
+  }
+
+  /* ---------- KPI count-up target state ---------- */
+  .kpi .num{opacity:0; transform:translateY(6px); transition:opacity 0.4s ease, transform 0.4s ease;}
+  .kpi .num.revealed{opacity:1; transform:translateY(0);}
 </style>
 </head>
 <body>
 
-<header class="hero">
+<nav id="topnav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark">BK</a>
+    <ul class="nav-links">
+      <li><a href="#summary" data-nav>Summary</a></li>
+      <li><a href="#experience" data-nav>Experience</a></li>
+      <li><a href="#ai-focus" data-nav>AI Focus</a></li>
+      <li><a href="#skills" data-nav>Skills</a></li>
+      <li><a href="#edu-lang" data-nav>Education</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header class="hero" id="top">
   <div class="wrap hero-inner">
     <div>
       <div class="kicker">DATA ANALYTICS &amp; INSIGHTS LEAD</div>
@@ -364,6 +498,19 @@
     <div class="role-item current">
       <div class="role-title">Data Analytics and Insights Lead — Cargill, Ocean Transportation</div>
       <div class="role-meta">Jun 2021 – Aug 2026 · Varna, Bulgaria</div>
+      <button class="ctx-toggle" data-ctx-toggle aria-expanded="false">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+        About Cargill Ocean Transportation
+      </button>
+      <div class="ctx-panel" data-ctx-panel>
+        <div class="ctx-panel-inner">
+          <ul>
+            <li>Cargill's maritime division and one of the largest dry-bulk charterers in the world, moving grain, iron ore, coal, and other commodities across a fleet of 600+ vessels.</li>
+            <li>Runs thousands of voyages a year, calling around 700 ports — trading physical cargo alongside freight derivatives to manage global market risk.</li>
+            <li>Has been investing in a centralized, AI-ready data platform to turn vessel and trade-flow data into operational and trading decisions.</li>
+          </ul>
+        </div>
+      </div>
       <ul>
         <li>Managed, mentored, and upskilled a team of <strong>10 data professionals</strong> delivering BI solutions across the Ocean Transportation desk (~300 employees).</li>
         <li>Designed and deployed scalable data architecture on <strong>Snowflake</strong> and <strong>Microsoft Fabric</strong> to support desk-wide reporting.</li>
@@ -376,6 +523,19 @@
     <div class="role-item">
       <div class="role-title">Customer Success Specialist — MyPos</div>
       <div class="role-meta">Jan 2020 – Jun 2021 · Varna, Bulgaria</div>
+      <button class="ctx-toggle" data-ctx-toggle aria-expanded="false">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+        About MyPos
+      </button>
+      <div class="ctx-panel" data-ctx-panel>
+        <div class="ctx-panel-inner">
+          <ul>
+            <li>European fintech founded in 2014, providing card readers, e-money accounts, and online payment tools to small and medium-sized merchants.</li>
+            <li>Was the first company in Europe to offer merchants instant settlement of card payments at no extra cost.</li>
+            <li>Now serves well over 200,000 businesses across 30+ European markets.</li>
+          </ul>
+        </div>
+      </div>
       <ul>
         <li>Resolved complex merchant inquiries via high-volume phone support, maintaining high satisfaction across international accounts.</li>
         <li>Primary liaison between international customers and internal departments (Product, Technical Support, Risk) — resolving issues <strong>in 3 languages</strong>.</li>
@@ -386,6 +546,19 @@
     <div class="role-item">
       <div class="role-title">Logistics Manager — Palais des Festivals</div>
       <div class="role-meta">Jan 2016 – Jan 2019 · Cannes, France</div>
+      <button class="ctx-toggle" data-ctx-toggle aria-expanded="false">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 6 6 6-6"/></svg>
+        About Palais des Festivals
+      </button>
+      <div class="ctx-panel" data-ctx-panel>
+        <div class="ctx-panel-inner">
+          <ul>
+            <li>Cannes' landmark convention centre and the home of the Cannes Film Festival, hosting over 150 events a year across both cultural and B2B programming.</li>
+            <li>A major hub for global trade shows — including Cannes Lions and MIPIM — drawing 300,000+ professional visitors annually.</li>
+            <li>Operates 35,000 m² of exhibition space and 50 meeting rooms, requiring tightly coordinated logistics across client, venue, and vendor teams.</li>
+          </ul>
+        </div>
+      </div>
       <ul>
         <li>Coordinated large-scale logistics for major international events, from planning through teardown.</li>
         <li>Central point of contact between clients, venue operations, and internal departments.</li>
@@ -393,6 +566,33 @@
       </ul>
     </div>
 
+  </div>
+</section>
+
+<section id="ai-focus">
+  <div class="section-head"><h2>Business analysis for AI</h2></div>
+  <p class="ai-intro">Most of the value in an AI rollout gets decided before a single model is built — in whether the team is solving a problem worth solving. My focus is finding those use cases: sitting with a desk, mapping where its time actually goes, and matching the real bottleneck to a capability that can move it. It's the same lens that took reporting effort down 70% at Cargill, just aimed one step earlier in the process.</p>
+  <div class="framework">
+    <div class="fw-step">
+      <div class="fw-num">01</div>
+      <h4>Map the workflow</h4>
+      <p>Shadow the desk, trace how a task moves end to end, and log where the time and rework actually happen.</p>
+    </div>
+    <div class="fw-step">
+      <div class="fw-num">02</div>
+      <h4>Find the bottleneck</h4>
+      <p>Separate the busywork from the judgment calls — only the former is worth automating.</p>
+    </div>
+    <div class="fw-step">
+      <div class="fw-num">03</div>
+      <h4>Match the capability</h4>
+      <p>Pick the smallest tool that closes the gap, whether that's a model, an automation, or a better dashboard.</p>
+    </div>
+    <div class="fw-step">
+      <div class="fw-num">04</div>
+      <h4>Prove the return</h4>
+      <p>Pilot with one team, measure hours or errors saved, then make the case for scaling it.</p>
+    </div>
   </div>
 </section>
 
@@ -467,5 +667,57 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  // Sticky nav background + scroll progress
+  var nav = document.getElementById('topnav');
+  var progress = document.getElementById('scrollProgress');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle('scrolled', y > 40);
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Active nav link on section in view
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var navObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = navLinks.find(function(a){ return a.getAttribute('href') === id; });
+      if(!link) return;
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        link.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(function(s){ navObserver.observe(s); });
+
+  // Company-context expand/collapse
+  document.querySelectorAll('[data-ctx-toggle]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var panel = btn.nextElementSibling;
+      var isOpen = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  // KPI reveal (single orchestrated moment, plays once)
+  var kpiObserver = new IntersectionObserver(function(entries, obs){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  document.querySelectorAll('.kpi .num').forEach(function(el){ kpiObserver.observe(el); });
+})();
+</script>
 </body>
 </html>
